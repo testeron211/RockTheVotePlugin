@@ -26,7 +26,7 @@ public class RockTheVotePlugin extends Plugin {
             int req = (int) Math.ceil(ratio * Vars.playerGroup.size());
             if(votes.contains(player)) {
                 votes.remove(player);
-                Call.sendMessage("RTV: [accent]" + player.name + "[] left, [green]" + cur + "[] votes, [green]" + req + "[] required");
+                Call.sendMessage("RTV: [accent]" + player.name + "[] вышел, [green]" + cur + "[] голосов, [green]" + req + "[] требуется");
             }
         });
         // clear votes on game over
@@ -34,14 +34,14 @@ public class RockTheVotePlugin extends Plugin {
             this.votes.clear();
         });
     }
-    
+
 
     //register commands that player can invoke in-game
     @Override
     public void registerClientCommands(CommandHandler handler){
 
         //register a simple reply command
-        handler.<Player>register("rtv", "[off]", "Rock the vote to change map", (args, player) -> {
+        handler.<Player>register("rtv", "[off]", "Rock the vote для смены карты", (args, player) -> {
             if (player.isAdmin){
                 if (args.length == 1 && args[0].equals("off")) {
                     this.enable = false;
@@ -50,21 +50,21 @@ public class RockTheVotePlugin extends Plugin {
                 }
             }
             if (!this.enable) {
-                player.sendMessage("RTV: RockTheVote is disabled");
+                player.sendMessage("RTV: RockTheVote выключен!");
                 return;
             }
             this.votes.add(player);
             int cur = this.votes.size();
             int req = (int) Math.ceil(ratio * Vars.playerGroup.size());
-            Call.sendMessage("RTV: [accent]" + player.name + "[] wants to change the map, [green]" + cur +
-                "[] votes, [green]" + req + "[] required");
+            Call.sendMessage("RTV: [accent]" + player.name + "[] хочет сменить карту, [green]" + cur +
+                "[] голосов, [green]" + req + "[] требуется");
 
             if (cur < req) {
                 return;
             }
 
             this.votes.clear();
-            Call.sendMessage("RTV: [green] vote passed, changing map.");
+            Call.sendMessage("RTV: [green] меняем карту.");
             Events.fire(new GameOverEvent(Team.crux));
         });
     }
