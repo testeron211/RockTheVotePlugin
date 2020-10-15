@@ -26,7 +26,7 @@ public class RockTheVotePlugin extends Plugin {
             int req = (int) Math.ceil(ratio * Vars.playerGroup.size());
             if(votes.contains(player)) {
                 votes.remove(player);
-                Call.sendMessage("RTV: [accent]" + player.name + "[] вышел, [green]" + cur + "[] голосов, [green]" + req + "[] требуется");
+                Call.sendMessage("RTV: [accent]" + player.name + "[] вышел, голосов [green]" + cur + "[], [green]" + req + "[] требуется");
             }
         });
         // clear votes on game over
@@ -56,15 +56,15 @@ public class RockTheVotePlugin extends Plugin {
             this.votes.add(player);
             int cur = this.votes.size();
             int req = (int) Math.ceil(ratio * Vars.playerGroup.size());
-            Call.sendMessage("RTV: [accent]" + player.name + "[] хочет сменить карту, [green]" + cur +
-                "[] голосов, [green]" + req + "[] требуется");
+            Call.sendMessage("RTV: [accent]" + player.name + "[] хочет сменить карту, голосов [green]" + cur +
+                "[], [green]" + req + "[] требуется");
 
             if (cur < req) {
                 return;
             }
 
             this.votes.clear();
-            Call.sendMessage("RTV: [green] меняем карту.");
+            Call.sendMessage("RTV: [green] Смена карты...");
             Events.fire(new GameOverEvent(Team.crux));
         });
     }
